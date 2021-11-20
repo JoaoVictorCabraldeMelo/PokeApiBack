@@ -3,32 +3,35 @@
 require 'spec_helper'
 
 RSpec.describe Pokemon, type: :model do
-  it 'is a valid Pokemon' do
-    expect(described_class.new(name: 'snorunt',
-                               image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/361.png', experience: 60)).to be_valid
+  describe 'Correct Validations' do
+    subject { build(:pokemon) }
+
+    it { is_expected.to validate_presence_of(:name) }
+
+    it { is_expected.to validate_presence_of(:image) }
+
+    it { is_expected.to validate_presence_of(:experience) }
   end
 
-  it 'is not valid without name' do
-    expect(described_class.new(image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/361.png',
-                               experience: 60)).not_to be_valid
+  it 'is invalid Pokemon name' do
+    pokemon = build(:pokemon_without_name)
+    expect(pokemon).not_to be_valid
   end
 
-  it 'is not valid without image' do
-    expect(described_class.new(name: 'snorut', experience: 60)).not_to be_valid
+  it 'Invalid Pokemon images' do
+    pokemon = build(:pokemon_without_image)
+    expect(pokemon).not_to be_valid
   end
 
-  it 'is not valid without experiencie' do
-    expect(described_class.new(name: 'snorut',
-                               image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/361.png')).not_to be_valid
+  it 'Invalid Pokemon experience' do
+    pokemon = build(:pokemon_without_experience)
+    expect(pokemon).not_to be_valid
   end
 
-  it 'saves in the database a valid Pokemon' do
-    @pokemon = described_class.new
-    @pokemon.name = 'snorunt'
-    @pokemon.image = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/361.png'
-    @pokemon.experience = 60
-    @initial_count = described_class.count
-    @pokemon.save!
-    expect(@initial_count).not_to equal(described_class.count)
+  describe 'save pokemon' do
+    it 'saves the pokemon in db' do
+      create(:pokemon)
+      expect(described_class.count).to equal(1)
+    end
   end
 end

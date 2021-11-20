@@ -6,7 +6,7 @@ FactoryBot.define do
     image { 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/361.png' }
     experience { 60 }
   end
-  factory :pokemon_without_title, parent: :pokemon do
+  factory :pokemon_without_name, parent: :pokemon do
     name { nil }
   end
   factory :pokemon_without_image, parent: :pokemon do
