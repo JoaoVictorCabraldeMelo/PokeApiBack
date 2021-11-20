@@ -1,7 +1,7 @@
-class Pokemon < ApplicationRecord
+# frozen_string_literal: true
 
-    validates :name, presence: true
-    validates :image, presence: true
-    validates :experience, presence: true
-    
+class Pokemon < ApplicationRecord
+  validates :name, presence: true
+  validates :image, presence: true
+  validates :experience, presence: true
 end
