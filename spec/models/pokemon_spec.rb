@@ -13,6 +13,10 @@ RSpec.describe Pokemon, type: :model do
     it { is_expected.to validate_presence_of(:experience) }
   end
 
+  # describe 'Association Test' do
+  #   it { should have_many(:player).through(:list) }
+  # end
+
   it 'is invalid Pokemon name' do
     pokemon = build(:pokemon_without_name)
     expect(pokemon).not_to be_valid

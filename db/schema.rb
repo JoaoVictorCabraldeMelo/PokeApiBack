@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_20_142754) do
+ActiveRecord::Schema.define(version: 2021_11_20_215122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "histories", force: :cascade do |t|
+    t.bigint "player1_id", null: false
+    t.bigint "player2_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["player1_id"], name: "index_histories_on_player1_id"
+    t.index ["player2_id"], name: "index_histories_on_player2_id"
+  end
+
+  create_table "list_pokemons", force: :cascade do |t|
+    t.bigint "pokemon_id", null: false
+    t.bigint "player_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["player_id"], name: "index_list_pokemons_on_player_id"
+    t.index ["pokemon_id"], name: "index_list_pokemons_on_pokemon_id"
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "pokemons", force: :cascade do |t|
     t.string "name"
@@ -23,4 +46,8 @@ ActiveRecord::Schema.define(version: 2021_11_20_142754) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "histories", "players", column: "player1_id"
+  add_foreign_key "histories", "players", column: "player2_id"
+  add_foreign_key "list_pokemons", "players"
+  add_foreign_key "list_pokemons", "pokemons"
 end

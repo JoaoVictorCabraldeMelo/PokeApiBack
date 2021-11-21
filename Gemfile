@@ -30,6 +30,9 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # Responsible to populate the db with an external API
 gem 'httparty'
 
+#Serializer
+gem 'active_model_serializers', '~> 0.10.0'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
