@@ -59,3 +59,7 @@ POST -> https://pokeapicabral.herokuapp.com/histories
 *Lembrando os ids de pokemon no banco vao ate 700*
 ## Historico de Trocas 
 GET -> https://pokeapicabral.herokuapp.com/histories
+
+## Repositorio do Frontend
+
+https://github.com/JoaoVictorCabraldeMelo/PokeApiFront
